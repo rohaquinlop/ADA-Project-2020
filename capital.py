@@ -25,32 +25,14 @@ def getQuadrant(x, y):
   else:
     return 4
 
-def binExpMOD(b, p):
-  """
-  This function have 2 parameters, b and p, and return (b^p)%MOD.
-  """
-  global MOD
-  ans = None
-  if p == 0:
-    ans = 1
-  elif p%2 == 0:
-    ans = binExpMOD(b, p//2)%MOD
-    ans = (ans*ans)%MOD
-  else:
-    ans = ((b%MOD)*(binExpMOD(b, p-1))%MOD)%MOD
-  return ans
-
 def C(n, k):
   global factorial, inverse, MOD
   ans = None
   if k == 0 or k == n:
     ans = 1
   else:
-    ans = (factorial[n] * inverse[ (factorial[k]*factorial[n-k])%MOD  ]%MOD)%MOD
+    ans = (factorial[n] * inverse[ (factorial[k]*factorial[n-k])%MOD ]%MOD)%MOD
   return ans
-
-# def solve(quadrants):
-#   ##
 
 ## Initializing factorial and inverse arrays
 factorial = [1 for _ in range(100001)]
@@ -62,8 +44,11 @@ inverse = [0 for _ in range(MOD)]
 inverse[1] = 1
 
 for i in range(2, MOD):
-  inverse[i] = binExpMOD(i, MOD-2)
-  #inverse[i] = ((MOD-(MOD//i))*inverse[MOD%i])%MOD
+  inverse[i] = ((MOD-(MOD//i))*inverse[MOD%i])%MOD
+
+def solve(quadrants):
+  
+  return 0
 
 def main():
   global MOD, factorial, inverse
@@ -82,4 +67,4 @@ def main():
       quadrants[getQuadrant(x, y)-1] += 1
       i += 1
 
-#main()
+main()
