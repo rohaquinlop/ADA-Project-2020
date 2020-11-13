@@ -62,7 +62,8 @@ inverse = [0 for _ in range(MOD)]
 inverse[1] = 1
 
 for i in range(2, MOD):
-  inverse[i] = ((MOD-(MOD//i))*inverse[MOD%i])%MOD
+  inverse[i] = binExpMOD(i, MOD-2)
+  #inverse[i] = ((MOD-(MOD//i))*inverse[MOD%i])%MOD
 
 def main():
   global MOD, factorial, inverse
