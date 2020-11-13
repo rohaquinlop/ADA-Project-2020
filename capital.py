@@ -46,9 +46,23 @@ inverse[1] = 1
 for i in range(2, MOD):
   inverse[i] = ((MOD-(MOD//i))*inverse[MOD%i])%MOD
 
+def buildPolynomial(x, y):
+  k = min(x, y)
+
+  ans = []
+
+  for i in range(k+1):
+    val = C(x, i)*C(y, i)
+    ans.append(val)
+  return ans
+
 def solve(quadrants):
-  
-  return 0
+  global factorial, inverse, MOD
+
+  P1 = buildPolynomial(quadrants[0], quadrants[2])
+  P2 = buildPolynomial(quadrants[1], quadrants[3])
+
+  print(P1, P2)
 
 def main():
   global MOD, factorial, inverse
@@ -66,5 +80,7 @@ def main():
       x, y = map(int, lines[i].strip().split())
       quadrants[getQuadrant(x, y)-1] += 1
       i += 1
+    
+    solve(quadrants)
 
 main()
